@@ -4,23 +4,8 @@ require("jquery");
 var React = require('react');   
 var ReactDOM = require('react-dom');
 
-var Home = require('./components/homePage');
-var About = require('./components/about/aboutPage');
+var RouterRouter = require('react-router');
+var Router = RouterRouter.Router;
+var routes = require('./routes');
 
-function render() {
-
-    var hash = window.location.hash.substr(1);
-
-    var Child = (hash === 'about') ? About : Home; 
-
-    ReactDOM.render(
-      <Child/>,
-      document.getElementById('app')
-    );    
-}
-
-window.addEventListener('hashchange',render);
-render();
-
-
-
+ReactDOM.render(<Router>{routes}</Router> , document.getElementById('app'));
