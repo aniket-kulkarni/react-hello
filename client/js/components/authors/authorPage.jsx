@@ -3,7 +3,8 @@
 var React = require('react');
 var hashHistory = require('react-router').hashHistory;
 var AuthorList = require('./AuthorList');
-var AuthorApi = require('../../api/authorApi');
+var AuthorStore = require('../../stores/authorStore');
+var AuthorActions = require('../../actions/authorActions.js');
 
 class Author extends React.Component {
 
@@ -14,6 +15,10 @@ class Author extends React.Component {
         this.state = {
             authors : []
         };
+        
+    }
+    deleteAuthor(authorId) {
+        AuthorActions.deleteAuthor(authorId);
     }
 
     goToAuthor(se,e) {
@@ -27,29 +32,26 @@ class Author extends React.Component {
 
     }
 
-    loadFromServer() {
-
-        function success(response) {
-            console.log(response);
-            this.setState({authors : response});
-        }
-
-        function error(response) {
-            console.log(response)
-        }
-    
-        AuthorApi.getAuthors(success.bind(this),error);
-
+    _onChange() {
+        var a = 1 + 2;
+        this.setState({authors : AuthorStore.getAllAuthors()});
     }
 
     componentDidMount() {
-        this.loadFromServer();
+        this.setState({authors : AuthorStore.getAllAuthors()});   
+        AuthorStore.addChangeListener(this._onChange.bind(this));
+    }
+
+   
+
+    componentWillUnmount() {
+        AuthorStore.removeChangeListener(this._onChange);
     }
 
     render() {
 
         return (
-            <AuthorList authors={this.state.authors} onClick={this.goToAuthor.bind(this)}/>
+            <AuthorList context={this} authors={this.state.authors} onClick={this.goToAuthor.bind(this)}/>
         );
     }
 

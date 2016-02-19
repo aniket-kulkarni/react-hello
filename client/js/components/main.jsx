@@ -3,8 +3,13 @@ require("jquery");
 /*eslint-disable no-unused-vars*/
 var React = require('react');   
 var Header = require('./header/header');
+var initActions = require('../actions/initActions');
 
 class Main extends React.Component {
+
+    componentWillMount() {
+        initActions.initAuthor();
+    }
 
     render() {
         return (
@@ -19,6 +24,4 @@ class Main extends React.Component {
 }
 
 module.exports = Main;
-
-
-
+    

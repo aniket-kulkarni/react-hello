@@ -13,10 +13,16 @@ class AuthorList extends React.Component {
                     <h1>Author Page</h1>
                 </div>
 
-                <p>{this.props.authors.map((author,i) => {
+                <div>{this.props.authors.map((author,i) => {
                     var boundClick = this.props.onClick.bind(this);
-                    return <div style={{cursor:'pointer'}} data-index={i} key={author.id} onClick={this.props.onClick}>{author.name}</div>
-                })}</p>
+                    return (
+                        <div key={author.id}>
+                            <div onClick={this.props.context.deleteAuthor.bind(this.props.context,author.id)}>Delete</div>
+                            <div style={{cursor:'pointer'}} data-index={i} key={author.id} onClick={this.props.onClick}>{author.name}</div>
+                            <br/>
+                        </div>
+                        )
+                })}</div>
             </div>
 
         );

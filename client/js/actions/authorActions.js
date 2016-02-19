@@ -13,14 +13,15 @@ var authorActions = {
 
     deleteAuthor : function(authorId) {
         
-        //delete the author
-        //
-        dispatcher.dispatch({
-            type : constants.DELETE_AUTHOR,
-            data : {
-                authorId : authorId
-            }
-        });
+        setTimeout(function() {
+            dispatcher.dispatch({
+                type : constants.DELETE_AUTHOR,
+                data : {
+                    authorId : authorId
+                }
+            });
+        }, 100);
+        
 
     }
 };
