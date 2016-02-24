@@ -1,30 +1,24 @@
+'use strict';
 
-var authorApi = require("../api/authorApi.js");
-var dispatcher = require("../dispatcher/appDispatcher.js");
-var constants = require("../constants/constants.js");
+var alt = require('../alt.js');
 
-var authorActions = {
-    
-    createAuthor : function(author) {
+class AuthorActions {
 
+    deleteAuthor(authorId) {
 
+        return function(dispatch) {
 
-    },
+            setTimeout(function() {
+                dispatch(authorId);
+            }, 100);
 
-    deleteAuthor : function(authorId) {
-        
-        setTimeout(function() {
-            dispatcher.dispatch({
-                type : constants.DELETE_AUTHOR,
-                data : {
-                    authorId : authorId
-                }
-            });
-        }, 100);
-        
+        };
 
+       
     }
-};
 
+}
 
-module.exports = authorActions;
+const locationActions = alt.createActions(AuthorActions);
+
+module.exports = locationActions;

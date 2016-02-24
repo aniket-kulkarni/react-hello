@@ -1,11 +1,14 @@
 var path = require('path');
+var webpack = require('webpack');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
+    devtool : 'source-map',
     context : path.resolve('client/js'),
-    entry : ["./app"],
+    entry : [ "./app"],
     output : {
         path : path.resolve('client/build/'),
-        publicPath : 'public/assets/js/',
+        publicPath : '/public/',
         filename : "bundle.js"
     },
     watch : false,
@@ -13,13 +16,23 @@ module.exports = {
         contentBase : 'client',
         port : 3005
     },
+    plugins: [
+        new webpack.NoErrorsPlugin(),
+        new ExtractTextPlugin('styles.css', {
+            allChunks: true
+        })
+    ],
 
     module : {
         loaders : [
             {
                 test : /\.(es6|js|jsx)$/,
                 exclude : /node_modules/,
-                loader : "babel"
+                loader : "babel"    
+            },
+            {
+                test: /\.css/,
+                loader : ExtractTextPlugin.extract('style-loader', 'css-loader?sourceMap&modules&importLoaders=1&localIdentName=[name]-[local]-[hash:base64:5]!cssnext-loader')
             }
         ]
     },

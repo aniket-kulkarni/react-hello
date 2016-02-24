@@ -1,4 +1,4 @@
-require("jquery");
+'use strict';
 
 /*eslint-disable no-unused-vars*/
 var React = require('react');   

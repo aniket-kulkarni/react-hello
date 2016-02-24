@@ -1,4 +1,6 @@
-var Dispatcher = require("flux").Dispatcher;
+'use strict';
+
+var Dispatcher = require('flux').Dispatcher;
 
 var dispatcher = new Dispatcher();
 

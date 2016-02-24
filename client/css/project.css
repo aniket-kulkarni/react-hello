@@ -1,0 +1,36 @@
+@import "./config.css";
+
+.root{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.controlBar {
+    flex-grow: 1;
+    display: flex;
+}
+
+:global(.project-navigator-wrap) {
+    background: grey;
+    width: var(--navigatorWidth);
+}
+
+:global(.project-viewer-wrap) {
+    background: red;
+    width: var(--viewerWidth);
+}
+
+:global(.project-editor-wrap) {
+    background: lightcoral;
+    width: var(--editorWidth);
+}
+
+:global(.project-patterns-wrap) {
+    background: yellow;
+    width: var(--patternsWidth);
+}
+
+:global(.project-control) {
+    flex-grow: 1;
+}

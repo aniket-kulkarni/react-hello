@@ -1,27 +1,29 @@
-var authorApi = require("../api/authorApi.js");
-var dispatcher = require("../dispatcher/appDispatcher.js");
-var constants = require("../constants/constants.js");
+'use strict';
 
-var initActions = {
-    
-    initAuthor : function() {
+var authorApi = require('../api/authorApi.js');
+var alt = require('../alt.js');
 
-        var success = function(response) {
+class InitActions {
 
-            var authors = response;
+    initAuthor() {
 
-            dispatcher.dispatch({
-                type : constants.APP_INIT,
-                authors : authors
-            });
+        return function(dispatch) {
+
+            var success = function(response) {
+                dispatch(response);
+            };
+
+            var error = function() {};
+
+            authorApi.getAuthors(success,error);
+
         };
-
-        var error = function(){};
-
-        authorApi.getAuthors(success,error);
-
+       
     }
-};
 
+}
 
-module.exports = initActions;
+const initActions1 = alt.createActions(InitActions);
+
+module.exports = initActions1;
+

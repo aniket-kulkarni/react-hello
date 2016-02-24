@@ -1,21 +1,18 @@
-require("jquery");
+'use strict';
 
-/*eslint-disable no-unused-vars*/
-var React = require('react');   
-var Header = require('./header/header');
-var initActions = require('../actions/initActions');
+var React = require('react');  
+
+var css = require('../../css/app.css'); 
 
 class Main extends React.Component {
 
     componentWillMount() {
-        initActions.initAuthor();
+        
     }
 
     render() {
         return (
-            
-            <div className="jumbotron">
-                <Header/>
+            <div className={css.main}>
                 {this.props.children}
             </div>
         );
